@@ -1,5 +1,4 @@
-docs/privacyidea.txt	/usr/share/simplesamlphp/modules/privacyidea/docs/
-lib			/usr/share/simplesamlphp/modules/privacyidea/lib/
+lib/Auth		/usr/share/simplesamlphp/modules/privacyidea/lib/
 default-enable		/usr/share/simplesamlphp/modules/privacyidea/
 dictionaries		/usr/share/simplesamlphp/modules/privacyidea/
 templates		/usr/share/simplesamlphp/modules/privacyidea/
