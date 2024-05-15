@@ -240,36 +240,36 @@ class Utils
         if (!empty($config['privacyideaServerURL']))
         {
             $pi = new PrivacyIDEA("simpleSAMLphp", $config['privacyideaServerURL']);
-            $pi->logger = new PILogger();
+            $pi->setLogger(new PILogger());
 
             if (array_key_exists('sslVerifyHost', $config) && !empty($config['sslVerifyHost']))
             {
-                $pi->sslVerifyHost = $config['sslVerifyHost'] !== "false";
+                $pi->setSSLVerifyHost($config['sslVerifyHost'] !== "false");
             }
 
             if (array_key_exists('sslVerifyPeer', $config) && !empty($config['sslVerifyPeer']))
             {
-                $pi->sslVerifyPeer = $config['sslVerifyPeer'] !== "false";
+                $pi->setSSLVerifyPeer($config['sslVerifyPeer'] !== "false");
             }
 
             if (array_key_exists('serviceAccount', $config) && !empty($config['serviceAccount']))
             {
-                $pi->serviceAccountName = $config['serviceAccount'];
+                $pi->setServiceAccountName($config['serviceAccount']);
             }
 
             if (array_key_exists('servicePass', $config) && !empty($config['servicePass']))
             {
-                $pi->serviceAccountPass = $config['servicePass'];
+                $pi->setServiceAccountPass($config['servicePass']);
             }
 
             if (array_key_exists('serviceRealm', $config) && !empty($config['serviceRealm']))
             {
-                $pi->serviceAccountRealm = $config['serviceRealm'];
+                $pi->setServiceAccountRealm($config['serviceRealm']);
             }
 
             if (array_key_exists('realm', $config) && !empty($config['realm']))
             {
-                $pi->realm = $config['realm'];
+                $pi->setRealm($config['realm']);
             }
 
             return $pi;
