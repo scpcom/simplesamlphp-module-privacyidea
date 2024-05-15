@@ -319,7 +319,7 @@ class PrivacyideaAuthSource extends UserPassBase
      */
     public static function checkAuthenticationComplete(array $state, PIResponse $piResponse, array $authSourceConfig): void
     {
-        $attributes = $piResponse->detailAndAttributes;
+        $attributes = $piResponse->getDetailAndAttributes();
 
         if (!empty($attributes))
         {
