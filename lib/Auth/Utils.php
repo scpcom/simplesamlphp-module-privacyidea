@@ -298,23 +298,23 @@ class Utils
         $config = $state['privacyidea:privacyidea'];
         $state['privacyidea:privacyidea:ui']['mode'] = "otp";
 
-        if (!empty($response->multiChallenge))
+        if (!empty($response->getMultiChallenge()))
         {
             // Authentication not complete, new challenges were triggered. Prepare the state for the next step.
             $triggeredTokens = $response->triggeredTokenTypes();
-            if (!empty($response->preferredClientMode))
+            if (!empty($response->getPreferredClientMode()))
             {
-                if ($response->preferredClientMode === "interactive")
+                if ($response->getPreferredClientMode() === "interactive")
                 {
                     $state['privacyidea:privacyidea:ui']['mode'] = "otp";
                 }
-                elseif ($response->preferredClientMode === "poll")
+                elseif ($response->getPreferredClientMode() === "poll")
                 {
                     $state['privacyidea:privacyidea:ui']['mode'] = "push";
                 }
                 else
                 {
-                    $state['privacyidea:privacyidea:ui']['mode'] = $response->preferredClientMode;
+                    $state['privacyidea:privacyidea:ui']['mode'] = $response->getPreferredClientMode();
                 }
                 Logger::debug("privacyIDEA: Preferred client mode: " . $state['privacyidea:privacyidea:ui']['mode']);
             }
@@ -322,7 +322,7 @@ class Utils
             $state['privacyidea:privacyidea:ui']['pushAvailable'] = in_array("push", $triggeredTokens);
             $state['privacyidea:privacyidea:ui']['otpAvailable'] = true;
 
-            $state['privacyidea:privacyidea:ui']['message'] = $response->messages;
+            $state['privacyidea:privacyidea:ui']['message'] = $response->getMessages();
 
             if (in_array("webauthn", $triggeredTokens))
             {
@@ -334,10 +334,10 @@ class Utils
                 $state['privacyidea:privacyidea:ui']['u2fSignRequest'] = $response->u2fSignRequest();
             }
 
-            $state['privacyidea:privacyidea']['transactionID'] = $response->transactionID;
+            $state['privacyidea:privacyidea']['transactionID'] = $response->getTransactionID();
 
             // Search for the image
-            foreach ($response->multiChallenge as $challenge)
+            foreach ($response->getMultiChallenge() as $challenge)
             {
                 if (!empty($challenge->image))
                 {
@@ -360,7 +360,7 @@ class Utils
                 }
             }
         }
-        elseif ($response->value)
+        elseif ($response->getValue())
         {
             // Authentication successful. Finalize the authentication depending on method (AuthProc or AuthSource) and
             // write SSO specific data if enabled.
@@ -384,18 +384,18 @@ class Utils
                 PrivacyideaAuthSource::checkAuthenticationComplete($state, $response, $config);
             }
         }
-        elseif (!empty($response->errorCode))
+        elseif (!empty($response->getErrorCode()))
         {
             // privacyIDEA returned an error, prepare to display it
-            Logger::error("privacyIDEA: Error code: " . $response->errorCode . ", Error message: " . $response->errorMessage);
-            $state['privacyidea:privacyidea']['errorCode'] = $response->errorCode;
-            $state['privacyidea:privacyidea']['errorMessage'] = $response->errorMessage;
+            Logger::error("privacyIDEA: Error code: " . $response->getErrorCode() . ", Error message: " . $response->getErrorMessage());
+            $state['privacyidea:privacyidea']['errorCode'] = $response->getErrorCode();
+            $state['privacyidea:privacyidea']['errorMessage'] = $response->getErrorMessage();
         }
         else
         {
             // Unexpected response
-            Logger::error("privacyIDEA: " . $response->message);
-            $state['privacyidea:privacyidea']['errorMessage'] = $response->message;
+            Logger::error("privacyIDEA: " . $response->getMessage());
+            $state['privacyidea:privacyidea']['errorMessage'] = $response->getMessage();
         }
         return State::saveState($state, 'privacyidea:privacyidea');
     }
