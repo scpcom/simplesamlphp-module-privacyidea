@@ -17,6 +17,9 @@
  * messages of the PHP-Client to the logger
  * implementation of the project that uses the client.
  */
+
+namespace SimpleSAML\Module\privacyidea\Auth;
+
 interface PILog
 {
     public function piDebug($message);

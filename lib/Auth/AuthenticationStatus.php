@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+namespace SimpleSAML\Module\privacyidea\Auth;
+
 abstract class AuthenticationStatus
 {
     const CHALLENGE = "CHALLENGE";

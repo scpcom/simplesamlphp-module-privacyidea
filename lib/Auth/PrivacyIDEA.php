@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+namespace SimpleSAML\Module\privacyidea\Auth;
+
 const AUTHENTICATORDATA = "authenticatordata";
 const CLIENTDATA = "clientdata";
 const SIGNATUREDATA = "signaturedata";

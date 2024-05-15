@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+namespace SimpleSAML\Module\privacyidea\Auth;
+
 class PIChallenge
 {
     /* @var string Type of token this challenge is for. */

@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+namespace SimpleSAML\Module\privacyidea\Auth;
+
 class PIBadRequestException extends Exception
 {
 }
